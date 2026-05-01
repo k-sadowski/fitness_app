@@ -107,6 +107,7 @@ A real, dated, logged session. Created either by the user (starting a planned or
 | `totalDistanceKm` | `Double?` | from HKWorkout if present (also flows into `cardio.distanceKm`) |
 | `strengthSets` | `[StrengthSet]` | cascade; empty for imported cardio |
 | `cardio` | `CardioSummary?` | cascade |
+| `skippedExerciseIds` | `[UUID]` | `Exercise.id`s the user explicitly skipped during a planned strength session — surfaced as "Skipped" rows in history |
 
 ### `StrengthSet`
 One set inside a session.
