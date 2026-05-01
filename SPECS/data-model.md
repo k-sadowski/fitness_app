@@ -16,9 +16,10 @@ The user-curated library entry.
 |---|---|---|
 | `id` | `UUID` | primary identifier |
 | `name` | `String` | e.g. "Barbell Back Squat" |
-| `trainingType` | `TrainingType` (enum, raw `String`) | strength / running / tennis / walkingPad |
+| `trainingType` | `TrainingType` (enum, raw `String`) | strength / running / tennis / walkingPad / circuit / other |
 | `descriptionText` | `String?` | how to perform, cues |
 | `muscleGroups` | `[String]` | freeform tags for v1 |
+| `isArchived` | `Bool` | default `false`. Soft-delete flag — archived exercises hide from pickers but preserve history. |
 | `createdAt` | `Date` | |
 | `plannedEntries` | `[PlannedExerciseEntry]` (inverse) | |
 | `loggedSets` | `[StrengthSet]` (inverse) | |
