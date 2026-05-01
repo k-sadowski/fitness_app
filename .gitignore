@@ -1,0 +1,26 @@
+# Source training docs — kept local while we iterate
+IMPORT DATA/
+
+# Claude Code local-only settings
+.claude/settings.local.json
+
+# macOS
+.DS_Store
+
+# Xcode (added preemptively)
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Packages/*/.build/
+Package.resolved
+
+# Misc
+*.log
