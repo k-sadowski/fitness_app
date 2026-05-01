@@ -18,7 +18,7 @@ struct FitnessAppApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootTabView()
         }
         .modelContainer(container)
     }
