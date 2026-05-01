@@ -33,9 +33,41 @@ Full design lives under [`SPECS/`](./SPECS):
 - [`architecture.md`](./SPECS/architecture.md) — Xcode project layout and tech rationale
 - [`product.md`](./SPECS/product.md) — V1 scope, V2 candidates, open assumptions
 - [`data-model.md`](./SPECS/data-model.md) — entities, relationships, HealthKit ingest rules
+- [`ui.md`](./SPECS/ui.md) — navigation graph and screen-by-screen V1 spec
+- [`user-stories.md`](./SPECS/user-stories.md) — 28 day-in-the-life flows + resolved UX decisions
 - [`plan-import.md`](./SPECS/plan-import.md) — markdown template format and parser behavior
 - [`templates/training-plan.template.md`](./SPECS/templates/training-plan.template.md) — fillable plan template
 
+## Project layout
+
+```
+FitnessApp/                    Xcode multi-platform app target (iOS + Mac)
+└── FitnessApp.xcodeproj
+Packages/
+└── FitnessCore/               Local Swift Package — shared by every target
+    ├── Sources/FitnessCore/
+    │   ├── Models/            SwiftData @Model types + enums + SchemaV1
+    │   └── Persistence/       ModelContainerFactory + Seeder
+    └── Tests/FitnessCoreTests/
+SPECS/                         Design docs (this folder)
+```
+
+## Build & run
+
+Open `FitnessApp/FitnessApp.xcodeproj` in Xcode 16+ and ⌘R. iOS 17 / macOS 14 minimum (SwiftData requirement). The package builds standalone too:
+
+```bash
+cd Packages/FitnessCore
+swift build
+swift test
+```
+
 ## Status
 
-Specs phase. No code yet — Xcode project scaffolding is the next step.
+Scaffolding done; first vertical slice shipped.
+
+- ✅ `FitnessCore` package: all V1 SwiftData `@Model` types, versioned schema, `ModelContainerFactory`, idempotent `Seeder`. 3 unit tests passing.
+- ✅ Xcode app: launches into a 5-tab `RootTabView` per [`ui.md`](./SPECS/ui.md).
+- ✅ **Weight tracking** end-to-end (Metrics tab): log sheet, history list with delete, persistence verified across app kills.
+- 🚧 Today / History / Library / Settings tabs are placeholders.
+- 🚧 HealthKit, plan editing, plan import, workout logging, onboarding — all per spec, not yet implemented.
