@@ -40,6 +40,12 @@ extension TrainingType {
     }
 }
 
+/// ISO 8601 weekday for the given date: 1 = Mon … 7 = Sun.
+func isoWeekday(from date: Date, calendar: Calendar = .current) -> Int {
+    let w = calendar.component(.weekday, from: date) // 1 = Sun … 7 = Sat
+    return w == 1 ? 7 : w - 1
+}
+
 func weekdayName(_ weekday: Int) -> String {
     // ISO 8601 weekday: 1 = Mon … 7 = Sun.
     // Foundation's standaloneWeekdaySymbols is Sunday-first (index 0 = Sun).

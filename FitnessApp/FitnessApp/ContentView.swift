@@ -3,40 +3,35 @@ import SwiftData
 import FitnessCore
 
 struct RootTabView: View {
+    @State private var selection: AppTab = .today
+
     var body: some View {
-        TabView {
-            TodayPlaceholderView()
+        TabView(selection: $selection) {
+            TodayHomeView()
                 .tabItem { Label("Today", systemImage: "figure.run.circle.fill") }
+                .tag(AppTab.today)
 
             HistoryPlaceholderView()
                 .tabItem { Label("History", systemImage: "clock.arrow.circlepath") }
+                .tag(AppTab.history)
 
             LibraryPlaceholderView()
                 .tabItem { Label("Library", systemImage: "dumbbell.fill") }
+                .tag(AppTab.library)
 
             MetricsHomeView()
                 .tabItem { Label("Metrics", systemImage: "chart.line.uptrend.xyaxis") }
+                .tag(AppTab.metrics)
 
             SettingsRootView()
                 .tabItem { Label("Settings", systemImage: "gearshape.fill") }
+                .tag(AppTab.settings)
         }
+        .environment(\.appTabSelection, $selection)
     }
 }
 
 // MARK: - Placeholder tabs
-
-private struct TodayPlaceholderView: View {
-    var body: some View {
-        NavigationStack {
-            ContentUnavailableView(
-                "Today",
-                systemImage: "figure.run.circle",
-                description: Text("Today's workouts will appear here.")
-            )
-            .navigationTitle("Today")
-        }
-    }
-}
 
 private struct HistoryPlaceholderView: View {
     var body: some View {
