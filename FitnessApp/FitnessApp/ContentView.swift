@@ -17,7 +17,7 @@ struct RootTabView: View {
             MetricsHomeView()
                 .tabItem { Label("Metrics", systemImage: "chart.line.uptrend.xyaxis") }
 
-            SettingsPlaceholderView()
+            SettingsRootView()
                 .tabItem { Label("Settings", systemImage: "gearshape.fill") }
         }
     }
@@ -60,19 +60,6 @@ private struct LibraryPlaceholderView: View {
                 description: Text("Your exercises will live here.")
             )
             .navigationTitle("Library")
-        }
-    }
-}
-
-private struct SettingsPlaceholderView: View {
-    var body: some View {
-        NavigationStack {
-            ContentUnavailableView(
-                "Settings",
-                systemImage: "gearshape.fill",
-                description: Text("Plans, reminders, and integrations will live here.")
-            )
-            .navigationTitle("Settings")
         }
     }
 }
