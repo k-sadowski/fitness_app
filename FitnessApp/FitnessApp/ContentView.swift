@@ -11,7 +11,7 @@ struct RootTabView: View {
                 .tabItem { Label("Today", systemImage: "figure.run.circle.fill") }
                 .tag(AppTab.today)
 
-            HistoryPlaceholderView()
+            HistoryListView()
                 .tabItem { Label("History", systemImage: "clock.arrow.circlepath") }
                 .tag(AppTab.history)
 
@@ -32,19 +32,6 @@ struct RootTabView: View {
 }
 
 // MARK: - Placeholder tabs
-
-private struct HistoryPlaceholderView: View {
-    var body: some View {
-        NavigationStack {
-            ContentUnavailableView(
-                "History",
-                systemImage: "clock.arrow.circlepath",
-                description: Text("Logged workouts will appear here.")
-            )
-            .navigationTitle("History")
-        }
-    }
-}
 
 private struct LibraryPlaceholderView: View {
     var body: some View {
