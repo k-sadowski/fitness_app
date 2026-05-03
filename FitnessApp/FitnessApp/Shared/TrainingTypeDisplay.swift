@@ -53,3 +53,7 @@ func weekdayName(_ weekday: Int) -> String {
     let sundayFirstIndex = weekday == 7 ? 0 : weekday
     return symbols[sundayFirstIndex]
 }
+
+func formatKg(_ kg: Double) -> String {
+    String(format: "%.1f kg", kg)
+}

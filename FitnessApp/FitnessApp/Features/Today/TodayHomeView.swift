@@ -12,6 +12,8 @@ struct TodayHomeView: View {
     @State private var showingPlanSwitcher = false
     @State private var showingWeightLog = false
     @State private var workoutToShow: PlannedWorkout?
+    @State private var showingAdHocPicker = false
+    @State private var adHocLogType: TrainingType?
 
     private var today: Date { Date() }
     private var activePlan: Plan? { plans.first(where: \.isActive) }
@@ -39,6 +41,14 @@ struct TodayHomeView: View {
                 }
                 .sheet(isPresented: $showingWeightLog) {
                     WeightLogSheet(suggestedWeight: weightEntries.first?.weightKg)
+                }
+                .sheet(isPresented: $showingAdHocPicker) {
+                    AdHocLogTypePicker { type in
+                        adHocLogType = type
+                    }
+                }
+                .fullScreenCover(item: $adHocLogType) { type in
+                    WorkoutLogView(adHocType: type)
                 }
                 .navigationDestination(item: $workoutToShow) { workout in
                     PlannedWorkoutDetailView(
@@ -81,16 +91,11 @@ struct TodayHomeView: View {
 
                 Section {
                     Button {
-                        // Wired in a later slice when WorkoutLogView lands.
+                        showingAdHocPicker = true
                     } label: {
                         Label("Log workout", systemImage: "plus.circle.fill")
                             .frame(maxWidth: .infinity)
                     }
-                    .disabled(true)
-                    Text("Ad-hoc logging coming soon.")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                        .frame(maxWidth: .infinity, alignment: .center)
                 }
 
                 Section("Quick stats") {

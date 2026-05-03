@@ -7,6 +7,7 @@ public final class CardioSummary {
     public var durationSeconds: Int = 0
     public var distanceKm: Double?
     public var averageSpeedKmh: Double?
+    public var rpe: Double?
     public var session: WorkoutSession?
 
     public init(
@@ -14,12 +15,14 @@ public final class CardioSummary {
         durationSeconds: Int,
         distanceKm: Double? = nil,
         averageSpeedKmh: Double? = nil,
+        rpe: Double? = nil,
         session: WorkoutSession? = nil
     ) {
         self.id = id
         self.durationSeconds = durationSeconds
         self.distanceKm = distanceKm
         self.averageSpeedKmh = averageSpeedKmh
+        self.rpe = rpe
         self.session = session
     }
 }

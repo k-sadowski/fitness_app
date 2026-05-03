@@ -218,12 +218,6 @@ struct WeightLogSheet: View {
     }
 }
 
-// MARK: - Helpers
-
-private func formatKg(_ kg: Double) -> String {
-    String(format: "%.1f kg", kg)
-}
-
 // MARK: - Previews
 
 #Preview("Tab root") {

@@ -7,6 +7,7 @@ struct PlannedWorkoutDetailView: View {
     let status: PlannedWorkoutStatus
 
     @State private var showingEditSheet = false
+    @State private var showingLogger = false
 
     var body: some View {
         Form {
@@ -57,19 +58,24 @@ struct PlannedWorkoutDetailView: View {
                 }
             }
 
-            Section {
-                Button {
-                    // Wired in a later slice when WorkoutLogView lands.
-                } label: {
-                    Label("Start workout", systemImage: "play.fill")
-                        .frame(maxWidth: .infinity)
+            if status != .done && workout.trainingType != .other {
+                Section {
+                    Button {
+                        showingLogger = true
+                    } label: {
+                        Label(status == .inProgress ? "Resume workout" : "Start workout",
+                              systemImage: status == .inProgress ? "arrow.clockwise" : "play.fill")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent)
                 }
-                .buttonStyle(.borderedProminent)
-                .disabled(true)
-                Text("Workout logging coming soon.")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-                    .frame(maxWidth: .infinity, alignment: .center)
+            }
+
+            if status == .done {
+                Section {
+                    Label("Logged. View in History.", systemImage: "checkmark.seal.fill")
+                        .foregroundStyle(.green)
+                }
             }
 
             Section {
@@ -84,6 +90,9 @@ struct PlannedWorkoutDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showingEditSheet) {
             PlannedWorkoutEditView(workout: workout)
+        }
+        .fullScreenCover(isPresented: $showingLogger) {
+            WorkoutLogView(plannedWorkout: workout)
         }
     }
 
